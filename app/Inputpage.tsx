@@ -78,9 +78,9 @@ const Inputpage = () => {
           </button>
         </div>
       </div>
-      <div className="bg-red-400 w-full h-fit p-5">
+      <pre className="bg-yellow-900  w-full overflow-x-auto whitespace-pre-wrap p-5 ">
         <ReactMarkdown>{analyzeddata}</ReactMarkdown>
-      </div>
+      </pre>
     </div>
   );
 };
