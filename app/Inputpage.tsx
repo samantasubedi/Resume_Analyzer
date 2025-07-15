@@ -61,15 +61,15 @@ const Inputpage = () => {
     reader.readAsText(file); //Even though reader.readAsText(file) is written after, it is actually the trigger — the starting point of the whole reading and uploading process.
   };
   return (
-    <div>
-      <div className="flex justify-center mt-[5%]">
+    <div className="flex flex-col gap-10 items-center">
+      <div className="flex justify-center mt-[5%] border-2 border-gray-700 md:w-[1000px] md:mb-10 bg-slate-900 p-5 rounded-2xl shadow-lg shadow-black">
         <div className="flex flex-col gap-10">
-          <div className="text-2xl font-semibold text-green-800">
+          <div className="text-3xl font-semibold text-green-800">
             Drop your Resume here
           </div>
           <input
             onChange={handlefilechange}
-            className="p-4 rounded-2xl size-[300px] bg-slate-700"
+            className="p-4 rounded-2xl size-[350px] bg-slate-700"
             type="file"
           ></input>
           <button onClick={handleanalyze} className="btn btn-primary ">
@@ -78,7 +78,7 @@ const Inputpage = () => {
           </button>
         </div>
       </div>
-      <pre className="bg-yellow-900  w-full overflow-x-auto whitespace-pre-wrap p-5 ">
+      <pre className="bg-cyan-950  w-full overflow-x-auto whitespace-pre-wrap p-5 ">
         <ReactMarkdown>{analyzeddata}</ReactMarkdown>
       </pre>
     </div>
