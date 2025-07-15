@@ -1,6 +1,9 @@
 "use client";
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 const Inputpage = () => {
+  const [analyzeddata, setanalyzeddata] = useState<string | null>(null);
   const [file, setfile] = useState<File | null>(null); // this is the way to define the type of state variable, enclose the type in <>
   function handlefilechange(event: React.ChangeEvent<HTMLInputElement>) {
     const selectedfile = event.target.files?.[0]; // .files?.[0]  means if the file exists get the first file
@@ -18,25 +21,65 @@ const Inputpage = () => {
 
     reader.onload = async () => {
       //“When the file has finished loading (reading), run this function.”
-      const filecontent = reader.result; //the result property of reader object contains actual file content that was read
+      const filecontent = reader.result as string | null; //the result property of reader object contains actual file content that was read
+      if (!filecontent) {
+        alert("Failed to read file");
+        return;
+      }
+
+      console.log(filecontent);
+      // try {
+      //   const res = await fetch("/analyze", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ content: filecontent }), //general syntax body: JSON.stringify({ key1: value1, key2: value2, ...})
+      //     //we're sending the file content in a key called content, and wrapping it in JSON format.
+      //   });
+      //   if (!res.ok) {
+      //     throw new Error(`HTTP error! status: ${res.status}`);
+      //   }
+      //   const data = await res.json(); //waits for response from the backend and parses it into json format
+      //   setanalyzeddata(data.result); //data is an object so we cannot set state variable that is defined as string to be object, so we access the result property of that object
+      // } catch (err) {
+      //   //err is a parameter that receives actual error object that was thrown inside try block
+      //   console.log("An error coccured ", err);
+      // }
+
+      try {
+        const response: AxiosResponse<{ result: string }> = await axios.post(
+          "/api/analyze",
+          { content: filecontent }
+        );
+        console.log(response.data);
+        setanalyzeddata(response.data.result);
+      } catch (err: any) {
+        console.log(err.message);
+      }
     };
+    reader.readAsText(file); //Even though reader.readAsText(file) is written after, it is actually the trigger — the starting point of the whole reading and uploading process.
   };
   return (
-    <div className="flex justify-center mt-[5%]">
-      <div className="flex flex-col gap-10">
-        <div className="text-2xl font-semibold text-green-800">
-          Drop your Resume here
+    <div>
+      <div className="flex justify-center mt-[5%]">
+        <div className="flex flex-col gap-10">
+          <div className="text-2xl font-semibold text-green-800">
+            Drop your Resume here
+          </div>
+          <input
+            onChange={handlefilechange}
+            className="p-4 rounded-2xl size-[300px] bg-slate-700"
+            type="file"
+          ></input>
+          <button onClick={handleanalyze} className="btn btn-primary ">
+            {" "}
+            Analyze
+          </button>
         </div>
-        <input
-          onChange={() => handlefilechange}
-          className="p-4 rounded-2xl size-[300px] bg-slate-700"
-          type="file"
-          accept=".pdf,.docx"
-        ></input>
-        <button onClick={() => handleanalyze} className="btn btn-primary ">
-          {" "}
-          Analyze
-        </button>
+      </div>
+      <div className="bg-red-400 w-full h-fit p-5">
+        <ReactMarkdown>{analyzeddata}</ReactMarkdown>
       </div>
     </div>
   );
