@@ -17,7 +17,7 @@ const Inputpage = () => {
       return;
     }
     //here we are extracting the data from the file and and sending it to backend , to send it to backend we need a backend api
-    const reader = new FileReader(); //This creates a new object from the built-in FileReader class (provided by the browser) and stores it in reader variable
+    const reader = new FileReader(); //This creates a new object from the built-in FileReader API (provided by the browser) and stores that filecontent in reader variable
 
     reader.onload = async () => {
       //“When the file has finished loading (reading), run this function.”
