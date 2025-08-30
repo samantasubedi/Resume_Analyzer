@@ -2,7 +2,9 @@
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+
 const Inputpage = () => {
+  const [loading, setloading] = useState<boolean>(false);
   const [analyzeddata, setanalyzeddata] = useState<string | null>(null);
   const [file, setfile] = useState<File | null>(null); // this is the way to define the type of state variable, enclose the type in <>
   function handlefilechange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -16,6 +18,8 @@ const Inputpage = () => {
       alert("please select a file first");
       return;
     }
+    setloading(true);
+    setanalyzeddata(null); //clearing the previous data if any
     //here we are extracting the data from the file and and sending it to backend , to send it to backend we need a backend api
     const reader = new FileReader(); //This creates a new object from the built-in FileReader API (provided by the browser) and stores that filecontent in reader variable
 
@@ -56,6 +60,8 @@ const Inputpage = () => {
         setanalyzeddata(response.data.result);
       } catch (err: any) {
         console.log(err.message);
+      } finally {
+        setloading(false);
       }
     };
     reader.readAsText(file); //Even though reader.readAsText(file) is written after, it is actually the trigger — the starting point of the whole reading and uploading process.
@@ -74,7 +80,7 @@ const Inputpage = () => {
           ></input>
           <button onClick={handleanalyze} className="btn btn-primary ">
             {" "}
-            Analyze
+            {loading == true ? "Analyzing" : "Analyze"}
           </button>
         </div>
       </div>
