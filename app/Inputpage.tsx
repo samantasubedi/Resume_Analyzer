@@ -2,6 +2,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { Icon } from "@iconify/react";
 
 const Inputpage = () => {
   const [loading, setloading] = useState<boolean>(false);
@@ -78,9 +79,12 @@ const Inputpage = () => {
             className="p-4 rounded-2xl size-[350px] bg-slate-700 hover:border-white  border-2 border-transparent cursor-pointer transition-all duration-300"
             type="file"
           ></input>
-          <button onClick={handleanalyze} className="btn btn-primary ">
+          <button onClick={handleanalyze} className="btn btn-primary text-2xl">
             {" "}
             {loading == true ? "Analyzing" : "Analyze"}
+            {loading && (
+              <Icon icon="eos-icons:bubble-loading" width="24" height="24" />
+            )}
           </button>
         </div>
       </div>
