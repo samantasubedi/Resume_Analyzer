@@ -15,14 +15,15 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: `analyze this resume, write with excellent formatting use various font size and styles as per requirement,you can also use icons , whatever it takes make it the best formatted text
+          content: `analyze this resume, write with excellent formatting use larger font size for titles and smalller for subtexts use font styles as per requirement,you can also use icons , whatever it takes make it the best formatted text
             include the following
              "summary": "Brief overview of resume quality",
   "strengths": ["...", "..."],
   "weaknesses": ["...", "..."],
   "suggestions": ["...", "..."],
   "overall_rating": Excellent / Good / Average / Poor
-  also rate the resume out of 100 on how good it is, you can rate other factors too`,
+  also rate the resume out of 100 on how good it is, you can rate other factors too
+  note: no need to rewrite the whole resume just analyze it and dont use tables`,
         },
         { role: "user", content },
       ],
