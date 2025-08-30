@@ -7,11 +7,11 @@ function Homepage() {
           <div className="font-mono font-bold text-4xl text-center  p-2 rounded-2xl text-red-500 underline ">
             AI RESUME ANALYZER
           </div>
-          <div className="font-sans  font-semibold text-sm md:text-2xl flex  w-[55%]  p-1 rounded-xl bg-gradient-to-r from-blue-800 to-blue-950 text-white">
+          <p className="max-w-3xl text-center text-gray-200 text-lg md:text-xl leading-relaxed font-semibold bg-cyan-950 p-2 rounded-2xl">
             Instantly evaluate and optimize your resume with AI. Get actionable
             insights to improve structure, keywords, and relevance for your
             target job.
-          </div>
+          </p>
         </div>
         <div className="flex justify-center">
           <Inputpage />
