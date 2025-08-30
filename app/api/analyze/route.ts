@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: `analyze this resume, write with excellent formatting (you can manupulate the font size and styles as per requrement, whatever it takes make it the best formatted text)
+          content: `analyze this resume, write with excellent formatting use various font size and styles as per requirement,you can also use icons , whatever it takes make it the best formatted text
             include the following
              "summary": "Brief overview of resume quality",
   "strengths": ["...", "..."],
