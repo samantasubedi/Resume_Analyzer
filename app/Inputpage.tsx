@@ -75,7 +75,7 @@ const Inputpage = () => {
             <div className="text-3xl font-semibold text-white">
               Drop your Resume here
               <div className="text-center text-lg text-red-500">
-                Text files only
+                ( .txt files only)
               </div>
             </div>
           </div>
