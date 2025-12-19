@@ -71,8 +71,13 @@ const Inputpage = () => {
     <div className="flex flex-col gap-10 items-center">
       <div className="flex justify-center mt-[5%] border-2 border-gray-700 md:w-[1000px] md:mb-10 bg-slate-900 p-5 rounded-2xl shadow-lg shadow-black">
         <div className="flex  flex-col gap-10">
-          <div className="text-3xl font-semibold text-green-800">
-            Drop your Resume here
+          <div className="flex felx-col gap-2 justify-center items-center">
+            <div className="text-3xl font-semibold text-white">
+              Drop your Resume here
+              <div className="text-center text-lg text-red-500">
+                Text files only
+              </div>
+            </div>
           </div>
           <input
             onChange={handlefilechange}
